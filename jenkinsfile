@@ -5,7 +5,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 echo 'Checking out source code...'
-                git branch: env.BRANCH_NAME, url: 'https://github.com/your-username/your-simple-web-app.git' // Replace with your Git repository URL
+                git branch: env.master, url:'https://github.com/raji-ctrl/jenkins-python-flask.git' // Replace with your Git repository URL
             }
         }
 

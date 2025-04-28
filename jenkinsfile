@@ -1,0 +1,36 @@
+pipeline {
+    agent any // Run this pipeline on any available Jenkins agent
+
+    stages {
+        stage('Checkout') {
+            steps {
+                echo 'Checking out source code...'
+                git branch: env.BRANCH_NAME, url: 'https://github.com/your-username/your-simple-web-app.git' // Replace with your Git repository URL
+            }
+        }
+
+        stage('Set Up Environment') {
+            steps {
+                echo 'Setting up Python environment...'
+                sh 'python3 -m venv venv'
+                sh 'source venv/bin/activate'
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                echo 'Installing dependencies...'
+                sh 'pip install -r requirements.txt'
+            }
+        }
+
+        stage('Run') {
+            steps {
+                echo 'Running the simple web application (for demonstration)...'
+                sh 'python app.py &' // Run in the background
+                sleep 5 // Wait for a few seconds to see it run
+                sh 'pkill -f "python app.py"' // Terminate the process
+            }
+        }
+    }
+}
